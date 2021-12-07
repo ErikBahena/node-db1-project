@@ -30,12 +30,16 @@ router.post(
   }
 );
 
-router.put("/:id", (req, res, next) => {
-  // DO YOUR MAGIC
+router.put("/:id", checkAccountId, checkAccountPayload, (req, res, next) => {
+  AccountsModel.updateById(req.params.id, req.body)
+    .then((updatedAccount) => res.status(200).json(updatedAccount))
+    .catch((err) => next(err));
 });
 
-router.delete("/:id", (req, res, next) => {
-  // DO YOUR MAGIC
+router.delete("/:id", checkAccountId, (req, res, next) => {
+  AccountsModel.deleteById(req.params.id)
+    .then(() => res.status(200))
+    .catch((err) => next(err));
 });
 
 router.use((err, req, res, next) => {

@@ -37,8 +37,8 @@ async function checkAccountNameUnique(req, res, next) {
 
   const foundRepeat = accounts.find((acc) => acc.name === req.body.name);
 
-  if (!foundRepeat) next();
   if (foundRepeat) res.status(400).json({ message: "that name is taken" });
+  if (!foundRepeat) next();
 }
 
 async function checkAccountId(req, res, next) {

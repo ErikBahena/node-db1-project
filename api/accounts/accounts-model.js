@@ -20,11 +20,13 @@ const create = async (account) => {
 };
 
 const updateById = async (id, account) => {
-  // DO YOUR MAGIC
+  const count = await db("accounts").where("id", id).update(account);
+
+  if (count) return getById(id);
 };
 
 const deleteById = async (id) => {
-  // DO YOUR MAGIC
+  await db("accounts").where("id", "=", id).del();
 };
 
 module.exports = {
