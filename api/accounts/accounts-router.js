@@ -38,7 +38,7 @@ router.put("/:id", checkAccountId, checkAccountPayload, (req, res, next) => {
 
 router.delete("/:id", checkAccountId, (req, res, next) => {
   AccountsModel.deleteById(req.params.id)
-    .then(() => res.status(200))
+    .then((deletedAcc) => res.status(200).json(deletedAcc))
     .catch((err) => next(err));
 });
 
